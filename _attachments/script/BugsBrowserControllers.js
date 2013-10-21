@@ -127,6 +127,7 @@
                     $scope.totalBugs = data.total_rows;
                     for(var row = 0; row < $scope.bugsList.length; row++) {
                         $scope.bugsList[row].latest = moment($scope.bugsList[row].value.latest).fromNow();
+                        console.log($scope.bugsList[row].value.latest);
                     }
                     $scope.loading = false;
                 },

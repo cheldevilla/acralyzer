@@ -108,7 +108,14 @@
                     data.next_row = data.rows.splice(reportsCount,1)[0];
                 }
                 for(var row = 0; row < data.rows.length; row++) {
+                    /*
+                    var value = JSON.stringify(data.rows[row].value);
+                    value = value.substring(20,59);
+                    console.log(moment(value).fromNow());
+                    console.log(data);
+                    */
                     data.rows[row].displayDate = moment(data.rows[row].key).fromNow();
+                    console.log(JSON.stringify(data));
                 }
                 cb(data);
             };
@@ -148,10 +155,13 @@
                 for(var row = 0; row < data.rows.length; row++) {
                     if(filterName === "bug") {
                         data.rows[row].displayDate = moment(data.rows[row].key[3]).fromNow();
+                        console.log('key3'+moment(data.rows[row].key[3]).fromNow());
                     } else if(filterName === "bug-by-installation-id") {
                         data.rows[row].displayDate = moment(data.rows[row].key[4]).fromNow();
+                        console.log('key4'+moment(data.rows[row].key[3]).fromNow());
                     } else {
                         data.rows[row].displayDate = moment(data.rows[row].key[1]).fromNow();
+                        console.log('key1'+moment(data.rows[row].key[3]).fromNow());
                     }
                 }
 
@@ -459,6 +469,8 @@
                             ReportsStore.lastseq = data.update_seq;
                         }
                         console.log("DB status retrieved, last_seq = " + ReportsStore.lastseq);
+                        console.log(data);
+                        console.log('DATAAAAA!!!!!!');
                         ReportsStore.continuePolling = true;
                         ReportsStore.currentWorkerId++;
                         ReportsStore.pollChanges(cb, ReportsStore.currentWorkerId);
